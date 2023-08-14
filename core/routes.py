@@ -13,10 +13,10 @@ def index():
 
     if short_id and ShortUrls.query.filter_by(short_id=short_id).first() is not None:
         # Please enter a different custom id
-        return jsonify({"message": "Please, enter a different custom id"})
+        return jsonify({"message": "Please, enter a different custom id"}), 400
     if not url:
         # Url is required
-        return jsonify({"message": "url is required"})
+        return jsonify({"message": "url is required"}), 400
     if not short_id:
         short_id = generate_short_id(8)
 
@@ -35,8 +35,3 @@ def redirect_url(short_id):
         return redirect(link.original_url)
 
     return redirect(url_for("index"))
-
-
-@app.route("/name")
-def name():
-    return jsonify({"name": "John"})
