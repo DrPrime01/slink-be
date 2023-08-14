@@ -3,13 +3,13 @@ from datetime import datetime
 from core.models import ShortUrls
 from core import app
 from core import db
-from random import choice
-import string
+import secrets
 
 
 def generate_short_id(chars_length: int):
     """Function to generate short_id of specified length of characters"""
-    return "".join(choice(string.ascii_letters+string.digits) for _ in range(chars_length))
+    nbytes = (chars_length * 3) // 4
+    return secrets.token_urlsafe(nbytes)[:chars_length]
 
 
 @app.route("/", methods=["POST"])
