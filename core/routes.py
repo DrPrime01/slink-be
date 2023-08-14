@@ -20,11 +20,16 @@ def index():
     if not short_id:
         short_id = generate_short_id(8)
 
-    new_link = ShortUrls(
-        original_url=url, short_id=short_id, created_at=datetime.utcnow())
-    db.session.add(new_link)
-    db.session.commit()
-    short_url = request.host_url + short_id
+    original_url = ShortUrls.query.filter_by(original_url=url).first()
+    if original_url is None:
+        new_link = ShortUrls(
+            original_url=url, short_id=short_id, created_at=datetime.utcnow())
+        db.session.add(new_link)
+        db.session.commit()
+        short_url = request.host_url + short_id
+    else:
+        original_url_short_id = original_url.short_id
+        short_url = request.host_url + original_url_short_id
     return jsonify({"short_url": short_url}), 201
 
 
