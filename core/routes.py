@@ -20,6 +20,9 @@ def index():
     if not short_id:
         short_id = generate_short_id(8)
 
+    # Check if a url already exists in the db.
+    # If it exists, return it's short_id and don't create a new one.
+    # If it doesn't exist, create a new one
     original_url = ShortUrls.query.filter_by(original_url=url).first()
     if original_url is None:
         new_link = ShortUrls(
