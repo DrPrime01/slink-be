@@ -19,13 +19,14 @@ def index():
 
     # Generate a random short_id
     short_id = generate_short_id(8)
+    short_url = request.host_url + short_id
 
     # Check if a url already exists in the db.
     # If it exists, return its short_id and don't create a new one.
     original_url = ShortUrls.query.filter_by(original_url=url).first()
     if original_url is None:
         new_link = ShortUrls(
-            original_url=url, short_id=short_id, created_at=datetime.utcnow())
+            original_url=url, short_id=short_id, short_url=short_url, created_at=datetime.utcnow())
         db.session.add(new_link)
         db.session.commit()
         short_url = request.host_url + short_id
@@ -167,7 +168,6 @@ def logged_in_user(username):
 
 
 # dashboard of all created links for logged in users
-
 
 @app.route("/<username>/dashboard", methods=["GET"])
 @jwt_required()
