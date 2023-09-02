@@ -10,8 +10,8 @@ class Config(object):
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
-    SECRET_KEY = config("SECRET_KEY", default="prime")
-    JWT_SECRET_KEY = config("JWT_SECRET_KEY", default="prime")
+    SECRET_KEY = config("SECRET_KEY")
+    JWT_SECRET_KEY = config("JWT_SECRET_KEY")
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
     SQLALCHEMY_DATABASE_URI = DATABASE_URI
     SQLALCHEMY_TRACK_MODIFICATIONS = False
