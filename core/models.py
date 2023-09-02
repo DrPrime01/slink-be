@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class ShortUrls(db.Model):
-    __tablename__ = "short_urls"
+    """Model for the shorturls table."""
     id = db.Column(db.Integer, primary_key=True)
     original_url = db.Column(db.String(500), nullable=False)
     short_id = db.Column(db.String(255), nullable=False, unique=True)
