@@ -1,11 +1,3 @@
-.vscode
-config.py
-venv
-config.py
-.DS_Store
-__pycache__
-migrations
-.env
 # Django #
 *.log
 *.pot
