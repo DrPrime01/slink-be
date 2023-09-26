@@ -7,11 +7,7 @@ from flask_jwt_extended import JWTManager
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {
-    "origins": "https://www.slink.lat",
-    "allow_headers": ["Content-Type", "Authorization"],
-    "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config.from_object(config("APP_SETTINGS"))
 
